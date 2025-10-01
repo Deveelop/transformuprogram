@@ -480,8 +480,8 @@ export default function Home() {
                    <a href="https://www.tiktok.com/@transformuhub" className="flex items-center gap-4 hover:text-blue-400 transition-colors">
 <svg
   className="w-6 h-6 text-red-500" 
-    width={size}
-    height={size}
+    width={24}
+    height={24}
     viewBox="0 0 24 24"
     fill={color}
     xmlns="http://www.w3.org/2000/svg"
