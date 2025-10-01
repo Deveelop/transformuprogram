@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/mongodb';
 import Registration from '../../../models/Registration';
+import { MongoError } from 'mongodb';
+import mongoose from 'mongoose';
 
 export async function POST(req: Request) {
   try {
@@ -17,27 +19,14 @@ export async function POST(req: Request) {
       commitment,
     } = await req.json();
 
-    console.log('Received data:', {
-      fullName,
-      email,
-      phone,
-      location,
-      gender,
-      whyJoin,
-      consistencyAreas,
-      otherArea,
-      selectedPackage,
-      commitment,
-    });
-
-    
+   
     if (!fullName || !email || !phone || !location || !gender || !whyJoin || !consistencyAreas?.length || !selectedPackage || !commitment) {
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
-    console.log('Connecting to MongoDB...');
+  
     await dbConnect();
-    
+    console.log('MongoDB connection successful');
 
     const existingUser = await Registration.findOne({ email });
     if (existingUser) {
@@ -59,25 +48,43 @@ export async function POST(req: Request) {
 
     
     await user.save();
-   
+    
 
     return NextResponse.json({ message: 'User registered successfully' }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     
-    if (error.name === 'ValidationError') {
+    if (error instanceof mongoose.Error.ValidationError) {
       return NextResponse.json(
         { message: 'Validation error', errors: error.errors },
         { status: 400 }
       );
     }
-    if (error.code === 'ECONNREFUSED' || error.syscall === 'querySrv') {
-      return NextResponse.json(
-        { message: 'Database connection failed. Please try again later.' },
-        { status: 500 }
-      );
+
+  
+    if (error instanceof MongoError) {
+      if (error.code === 11000) {
+        return NextResponse.json(
+          { message: 'Email already registered' },
+          { status: 400 }
+        );
+      }
     }
+
+    
+    if (error instanceof Error && 'code' in error && 'syscall' in error) {
+      const networkError = error as Error & { code: unknown; syscall: unknown };
+      if (networkError.code === 'ECONNREFUSED' || networkError.syscall === 'querySrv') {
+        return NextResponse.json(
+          { message: 'Database connection failed. Please try again later.' },
+          { status: 500 }
+        );
+      }
+    }
+
+  
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { message: 'Internal server error', error: error.message },
+      { message: 'Internal server error', error: errorMessage },
       { status: 500 }
     );
   }

@@ -352,7 +352,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4 italic">
-                &quot;Peter's guidance and the community support helped me stay consistent with my business goals. I&#39;ve seen remarkable growth in just 90 days!&quot;
+                &quot;Peter&apos;s guidance and the community support helped me stay consistent with my business goals. I&#39;ve seen remarkable growth in just 90 days!&quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
@@ -405,7 +405,7 @@ export default function Home() {
               From courses and coaching to mentorship and community, everything we do is designed to guide you on your journey of spiritual, personal, and professional growth.
             </p>
             <p className="text-xl font-semibold text-[#075326] mb-8">
-              Our mission is clear&#58; To raise men and women who live with purpose, master their potential, and advance God's Kingdom by first transforming themselves.
+              Our mission is clear&#58; To raise men and women who live with purpose, master their potential, and advance God&apos;s Kingdom by first transforming themselves.
             </p>
             <p className="text-lg text-[#075326] font-semibold">
               TransformU Hub &mdash; Becoming the Best Version of Yourself.
@@ -414,23 +414,23 @@ export default function Home() {
 
       
           <div className="bg-[#075326] text-white rounded-xl p-8">
-            <h3 className="text-2xl font-bold mb-6 text-center">Founder's Note</h3>
+            <h3 className="text-2xl font-bold mb-6 text-center">Founder&apos;s Note</h3>
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center text-4xl font-bold">
                 <Image src="/Mentor.jpg" alt="PA" width={150} height={150} className="rounded-full object-cover" />
               </div>
               <div className="flex-1">
                 <p className="text-lg mb-4 leading-relaxed">
-                  Hi, I'm Peter Achadu Abah, the Founder and CEO of TransformU Hub. My passion is to see lives transformed through practical steps, consistent growth, and God-centered living.
+                  Hi, I&apos;m Peter Achadu Abah, the Founder and CEO of TransformU Hub. My passion is to see lives transformed through practical steps, consistent growth, and God-centered living.
                 </p>
                 <p className="text-lg mb-4 leading-relaxed">
                   I started TransformU Hub with one focus: to empower you with tools, guidance, and accountability that help you grow into the person God created you to be.
                 </p>
                 <p className="text-lg mb-4 leading-relaxed">
-                  This 90-Days Consistency Journey is more than a program, it's an invitation to commit, grow, and transform. And I'll be walking the path with you.
+                  This 90-Days Consistency Journey is more than a program, it&apos;s an invitation to commit, grow, and transform. And I&apos;ll be walking the path with you.
                 </p>
                 <p className="text-lg font-semibold">
-                  Let's transform together!
+                  Let&apos;s transform together!
                 </p>
                 <p className="text-lg mt-4">
                   &mdash; Peter Achadu Abah<br />

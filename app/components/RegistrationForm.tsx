@@ -126,7 +126,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
       } else {
         setSubmitMessage(data.message || 'Registration failed. Please try again.');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Form submission error:', error);
       setSubmitMessage('Network error. Please check your connection and try again.');
     }
@@ -255,7 +255,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-3 text-black">
-                  <Label className='font-bold'>What's one area you want to stay consistent in? *</Label>
+                  <Label className='font-bold'>What&apos;s one area you want to stay consistent in? *</Label>
                   {consistencyOptions.map((option) => (
                     <div key={option} className="flex items-center space-x-2">
                       <Checkbox
