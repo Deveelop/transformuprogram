@@ -7,7 +7,7 @@ export interface IRegistration extends Document {
   location: string;
   gender: string;
   whyJoin: string;
-  consistencyAreas: string[];
+  consistencyAreas: string;
   otherArea?: string;
   selectedPackage: string;
   commitment: boolean;
@@ -21,7 +21,7 @@ const registrationSchema = new Schema<IRegistration>(
     location: { type: String, required: true },
     gender: { type: String, required: true },
     whyJoin: { type: String, required: true },
-    consistencyAreas: { type: [String], required: true },
+    consistencyAreas: { type: String, required: true },
     otherArea: { type: String },
     selectedPackage: { type: String, required: true },
     commitment: { type: Boolean, required: true },
