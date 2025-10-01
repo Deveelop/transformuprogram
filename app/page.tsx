@@ -332,15 +332,18 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4 italic">
-                &quot;The 90-day journey completely transformed my approach to fitness. I finally built a consistent workout routine that I&#39;ve maintained for over 6 months now!&quot;
+                &quot; The Consistency Mastery Class has helped me to sustain a consistent prayer and word study life since November, 2024 when we had the class and still counting...
+
+&quot;You don&apos;t need to be perfect to be consistent, you only need to be consistent to be perfect&quot; &ndash;Sir Peter
+ &quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                  S
+                  E
                 </div>
                 <div>
-                  <h4 className="font-semibold text-blue-500">Sarah Johnson</h4>
-                  <p className="text-sm text-gray-500">Fitness Enthusiast</p>
+                  <h4 className="font-semibold text-blue-500">Ekeh Samuel Ebube</h4>
+                  <p className="text-sm text-gray-500">COO, DLK Agro&ndash;Tech Ltd</p>
                 </div>
               </div>
             </div>
@@ -474,11 +477,25 @@ export default function Home() {
             <div>
               <h3 className="text-xl font-semibold mb-6">Follow Us</h3>
               <div className="space-y-4">
+                   <a href="https://www.tiktok.com/@transformuhub" className="flex items-center gap-4 hover:text-blue-400 transition-colors">
+<svg
+  className="w-6 h-6 text-red-500" 
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill={color}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12.75 2c.46 2.16 2.16 3.74 4.34 3.87v2.53c-1.14-.03-2.23-.37-3.17-.97v6.48c0 3.18-2.46 5.94-5.63 6.09A6.08 6.08 0 0 1 2.25 13.8c.02-3.3 2.71-6 6-6 .25 0 .5.02.75.05v2.6a3.42 3.42 0 0 0-.75-.07 3.46 3.46 0 0 0-3.46 3.46c0 1.87 1.53 3.4 3.4 3.4a3.46 3.46 0 0 0 3.46-3.46V2h2.1Z" />
+  </svg>
+
+                    <span>TikTok: @transformuhub</span>
+                  </a>
                 <a href="https://www.facebook.com/transformuhub" className="flex items-center gap-4 hover:text-blue-400 transition-colors">
                   <Facebook className="w-6 h-6 text-blue-400" />
                   <span>Facebook: TransformU Hub</span>
                 </a>
-                <a href="https://www.youtube.com/@transformuhub" className="flex items-center gap-4 hover:text-blue-400 transition-colors">
+                <a href="https://www.youtube.com/@transformuhubglobal" className="flex items-center gap-4 hover:text-blue-400 transition-colors">
                   <Youtube className="w-6 h-6 text-red-500" />
                   <span>YouTube: @transformuhub</span>
                 </a>
