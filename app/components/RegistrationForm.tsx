@@ -23,7 +23,7 @@ interface FormData {
   location: string;
   gender: string;
   whyJoin: string;
-  consistencyAreas: string[];
+  consistencyAreas: string;
   otherArea: string;
   selectedPackage: string;
   commitment: boolean;
@@ -37,7 +37,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
     location: '',
     gender: '',
     whyJoin: '',
-    consistencyAreas: [],
+    consistencyAreas: '', 
     otherArea: '',
     selectedPackage: selectedPackage || '',
     commitment: false,
@@ -71,9 +71,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
   const handleConsistencyAreaChange = (area: string, checked: boolean) => {
     setFormData((prev) => ({
       ...prev,
-      consistencyAreas: checked
-        ? [...prev.consistencyAreas, area]
-        : prev.consistencyAreas.filter((item) => item !== area),
+      consistencyAreas: checked ? area : prev.consistencyAreas === area ? '' : prev.consistencyAreas,
     }));
   };
 
@@ -91,7 +89,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
     formData.location &&
     formData.gender &&
     formData.whyJoin &&
-    formData.consistencyAreas.length > 0 &&
+    formData.consistencyAreas !== '' && // Updated to check for non-empty string
     formData.selectedPackage &&
     formData.commitment;
 
@@ -105,8 +103,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
     setIsSubmitting(true);
     setSubmitMessage('');
 
-
-
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
@@ -117,8 +113,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
       });
 
       const data = await response.json();
-
-    
 
       if (response.ok) {
         setSubmitMessage('Registration successful!');
@@ -136,7 +130,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
 
   const handleWhatsAppRedirect = () => {
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+2349033317004';
-    const message = `Receipt for ${formData.selectedPackage} payment from ${formData.fullName}`;
+    const message = `Please confirm Receipt for ${formData.selectedPackage} payment from ${formData.fullName}`;
     window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     onClose();
   };
@@ -169,12 +163,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
         <CardContent>
           {step === 'form' ? (
             <form onSubmit={handleSubmit} className="space-y-6">
-              
               <div className="space-y-4 text-black">
                 <h3 className="text-lg font-semibold text-[#075326]">Personal Information</h3>
 
                 <div className="space-y-2">
-                  <Label className='font-bold' htmlFor="fullName">Full Name *</Label>
+                  <Label className="font-bold" htmlFor="fullName">Full Name *</Label>
                   <Input
                     id="fullName"
                     type="text"
@@ -185,8 +178,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                   />
                 </div>
 
-                <div className="space-y-2 ">
-                  <Label className='font-bold' htmlFor="email">Email Address *</Label>
+                <div className="space-y-2">
+                  <Label className="font-bold" htmlFor="email">Email Address *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -198,7 +191,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-2">
-                  <Label className='font-bold' htmlFor="phone">Phone Number (WhatsApp preferred) *</Label>
+                  <Label className="font-bold" htmlFor="phone">Phone Number (WhatsApp preferred) *</Label>
                   <Input
                     id="phone"
                     type="tel"
@@ -210,7 +203,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-2">
-                  <Label className='font-bold' htmlFor="location">Location (State/Country) *</Label>
+                  <Label className="font-bold" htmlFor="location">Location (State/Country) *</Label>
                   <Input
                     id="location"
                     type="text"
@@ -222,7 +215,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-2">
-                  <Label className='font-bold' htmlFor="gender">Gender *</Label>
+                  <Label className="font-bold" htmlFor="gender">Gender *</Label>
                   <Select
                     value={formData.gender}
                     onValueChange={(value) => handleInputChange('gender', value)}
@@ -238,12 +231,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
               </div>
 
-            
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-[#075326]">Your Journey</h3>
 
                 <div className="space-y-2 text-black placeholder-gray-500">
-                  <Label className='font-bold ' htmlFor="whyJoin">Why do you want to join the 90 Days Consistency Journey? *</Label>
+                  <Label className="font-bold" htmlFor="whyJoin">Why do you want to join the 90 Days Consistency Journey? *</Label>
                   <Textarea
                     id="whyJoin"
                     required
@@ -255,13 +247,15 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-3 text-black">
-                  <Label className='font-bold'>What&apos;s one area you want to stay consistent in? *</Label>
+                  <Label className="font-bold">What&apos;s one area you want to stay consistent in? *</Label>
                   {consistencyOptions.map((option) => (
                     <div key={option} className="flex items-center space-x-2">
-                      <Checkbox
+                      <input
+                        type="radio"
                         id={option}
-                        checked={formData.consistencyAreas.includes(option)}
-                        onCheckedChange={(checked) => handleConsistencyAreaChange(option, !!checked)}
+                        name="consistencyArea"
+                        checked={formData.consistencyAreas === option}
+                        onChange={(e) => handleConsistencyAreaChange(option, e.target.checked)}
                       />
                       <Label htmlFor={option} className="text-sm font-normal">
                         {option}
@@ -269,7 +263,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                     </div>
                   ))}
 
-                  {formData.consistencyAreas.includes('Other') && (
+                  {formData.consistencyAreas === 'Other' && (
                     <div className="ml-6 space-y-2">
                       <Label htmlFor="otherArea">Please specify:</Label>
                       <Input
@@ -284,7 +278,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
               </div>
 
-             
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-[#075326]">Choose Your Path (Packages) *</h3>
 
@@ -307,7 +300,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 ))}
               </div>
 
-            
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-[#075326]">Commitment</h3>
 
@@ -324,7 +316,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
               </div>
 
-            
               {submitMessage && (
                 <div
                   className={`p-3 rounded-lg text-center ${
@@ -337,10 +328,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
               )}
 
-            
               <Button
                 type="submit"
-                className="w-full bg-[#ffcd1b]  cursor-pointer text-white py-3 text-lg font-semibold"
+                className="w-full bg-[#ffcd1b] cursor-pointer text-white py-3 text-lg font-semibold"
                 disabled={isSubmitting || !isFormValid()}
               >
                 {isSubmitting ? 'Registering...' : 'Register Now'}
