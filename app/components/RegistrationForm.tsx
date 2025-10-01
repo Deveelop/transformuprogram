@@ -348,10 +348,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
             </form>
           ) : (
             <div className="space-y-6 text-center">
-              <p className="text-lg">
+              <p className="text-lg text-black">
                 Please make payment of <strong>{price}</strong> for <strong>{selectedPkg?.name}</strong> to the following account:
               </p>
-              <div className="bg-gray-100 p-4 rounded-lg space-y-2">
+              <div className="bg-[#075326] text-white p-4 rounded-lg space-y-2">
                 <p><strong>Bank Name:</strong> Kuda MFB</p>
                 <p><strong>Account No.:</strong> 2007894244</p>
                 <p><strong>Account Name:</strong> Peter Achadu Abah</p>
