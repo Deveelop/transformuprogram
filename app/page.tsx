@@ -338,8 +338,8 @@ export default function Home() {
  &quot;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                  E
+                <div className="w-24 aspect-square rounded-full overflow-hidden ">
+                  <Image src='/samuel.jpg' alt='Gideon' className=' w-full h-full object-cover object-center' width={100} height={100}/>
                 </div>
                 <div>
                   <h4 className="font-semibold text-blue-500">Ekeh Samuel Ebube</h4>
@@ -358,11 +358,11 @@ export default function Home() {
                 &quot;Peter&apos;s guidance and the community support helped me stay consistent with my business goals. I&#39;ve seen remarkable growth in just 90 days!&quot;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
-                  M
+                <div className="w-24  aspect-square rounded-full overflow-hidden ">
+                  <Image src='/praise.jpg' alt='Gideon' className=' w-full h-full' width={100} height={100}/>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-green-500">Michael Chen</h4>
+                  <h4 className="font-semibold text-green-500">Praise Emem</h4>
                   <p className="text-sm text-gray-500">Entrepreneur</p>
                 </div>
               </div>
@@ -375,15 +375,16 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4 italic">
-                &quot;This program helped me develop a consistent prayer and personal growth routine. The accountability system made all the difference!&quot;
+                &quot;Decluttering changed everything for me. Once I cleared my space, I cleared my mind. I now feel lighter, more focused, and consistent in my daily routines.
+                The single step Sir P taught brought me more clarity and discipline than I ever imagined&quot;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold">
-                  A
+                <div className="w-24  aspect-square rounded-full overflow-hidden ">
+                  <Image src='/gideon.jpg' alt='Gideon' className=' w-full h-full' width={100} height={100}/>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-purple-500">Aisha Ibrahim</h4>
-                  <p className="text-sm text-gray-500">Personal Growth Advocate</p>
+                  <h4 className="font-semibold text-purple-500">Gideon Mema</h4>
+                  <p className="text-sm text-gray-500">Undergraduate Student</p>
                 </div>
               </div>
             </div>
@@ -419,8 +420,8 @@ export default function Home() {
           <div className="bg-[#075326] text-white rounded-xl p-8">
             <h3 className="text-2xl font-bold mb-6 text-center">Founder&apos;s Note</h3>
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center text-4xl font-bold">
-                <Image src="/Mentor.jpg" alt="PA" width={150} height={150} className="rounded-full object-cover" />
+              <div className="w-32 h-32  aspect-square rounded-full overflow-hidden ">
+                <Image src="/Mentor.jpg" alt="PA" width={100} height={100} className="w-full h-full  " />
               </div>
               <div className="flex-1">
                 <p className="text-lg mb-4 leading-relaxed">
