@@ -306,7 +306,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4 italic">
-                &quot;Peter&apos;s guidance and the community support helped me stay consistent with my business goals. I&#39;ve seen remarkable growth in just 90 days!&quot;
+                &quot; The Consistency Mastery Class shifted my mindset about consistency. I realized it&rsquo;s not about perfection but about showing up, taking one step at a time, and repeating it until it becomes a part of you. Since then, I&rsquo;ve built discipline, sustained a consistent lifestyle, and transformed how I approach my goals.&quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-24  aspect-square rounded-full overflow-hidden ">
@@ -314,7 +314,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-green-500">Praise Emem</h4>
-                  <p className="text-sm text-gray-500">Entrepreneur</p>
+                  <p className="text-sm text-gray-500">Social Media Manager &#47; Content Strategist</p>
                 </div>
               </div>
             </div>

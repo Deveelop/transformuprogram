@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "TransformU Hub | Peter Achadu Abah",
-  description: "Developed by Victor Unekwuojo Abuka",
+  description: "...becoming the best version of yourself!",
 };
 
 export default function RootLayout({
