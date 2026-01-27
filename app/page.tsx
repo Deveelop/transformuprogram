@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { CheckCircle, Star, Users, Calendar, Award, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react'
+import { CheckCircle, Star, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import RegistrationForm from '../app/components/RegistrationForm'
 

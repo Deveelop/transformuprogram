@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TransformU Hub | Peter Achadu Abah",
-  description: "...becoming the best version of yourself!",
+  title: "Tesla Crypto Growth Program | Elon Musk",
+  description: "...your key financial libration!",
 };
 
 export default function RootLayout({
