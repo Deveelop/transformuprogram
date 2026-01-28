@@ -77,7 +77,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
     'Trading Strategies',
     'Analytical Areas',
     'Asset Classes',
-    'No Knowledge',
+    'None',
     'Other',
   ];
 
@@ -157,7 +157,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
   };
 
   const handleWhatsAppRedirect = () => {
-     onClose();
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+14065032086';
+    const message = `Please confirm this Receipt`;
+    window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -379,7 +382,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
 
             {copied && (
               <p className="text-green-600 text-sm mt-2">
-                Wallet address copied
+                Wallet address copied. Proceed to your Exchanger to make deposit.
               </p>
             )}
 
