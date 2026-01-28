@@ -9,7 +9,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Checkbox } from '../components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { X } from 'lucide-react';
-const BTC_ADDRESS = "bc1qexamplebtcwalletaddress123";
+const BTC_ADDRESS = "1MnTUUdssHdEJt4VunusSfto3dTTV1xbh6";
 interface RegistrationFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -77,7 +77,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
     'Trading Strategies',
     'Analytical Areas',
     'Asset Classes',
-    'AI and Utilities',
+    'No Knowledge',
     'Other',
   ];
 
@@ -157,10 +157,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
   };
 
   const handleWhatsAppRedirect = () => {
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+14065032086';
-    const message = `Please confirm this Receipt`;
-    window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    onClose();
+     onClose();
   };
 
   if (!isOpen) return null;
@@ -226,7 +223,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                     required
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="Enter your choice coin"
+                    placeholder="Enter BTC as your choice coin"
                   />
                 </div>
 
@@ -269,7 +266,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                     required
                     value={formData.whyJoin}
                     onChange={(e) => handleInputChange('whyJoin', e.target.value)}
-                    placeholder="Tell us about your motivation and goals..."
+                    placeholder="Yes or No"
                     rows={4}
                   />
                 </div>
@@ -395,7 +392,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
             </div>
 
             <button
-             
+             onClick={handleWhatsAppRedirect}
               className="mt-5 w-full bg-green-600 text-white py-2 rounded"
             >
               I Have Made Payment
