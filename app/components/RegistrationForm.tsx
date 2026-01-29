@@ -222,7 +222,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ isOpen, onClose, se
                   <Label className="font-bold" htmlFor="phone">Crypto deposit (BTC) *</Label>
                   <Input
                     id="phone"
-                    type="tel"
+                    type="text"
                     required
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}

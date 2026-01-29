@@ -274,7 +274,7 @@ export default function Home() {
               </div>
              
               <div className="flex items-center gap-3">
-                <div className="w-60 aspect-square rounded-full overflow-hidden ">
+                <div className="w-24 aspect-square rounded-full overflow-hidden ">
                   <Image src='/tom.png' alt='tom' className=' w-full h-full object-cover object-center' width={100} height={100}/>
                 </div>
                 <div>
@@ -292,7 +292,7 @@ export default function Home() {
               </div>
              
               <div className="flex items-center gap-3">
-                <div className=" w-60  aspect-square rounded-full overflow-hidden ">
+                <div className=" w-24  aspect-square rounded-full overflow-hidden ">
                   <Image src='/jennyjohnson.jpeg' alt='jenny' className=' w-full h-full' width={100} height={100}/>
                 </div>
                 <div>
@@ -347,7 +347,7 @@ United States </p>
                   <Mail className="w-6 h-6 text-blue-300" />
                   <div>
                     <p className="font-semibold">Email</p>
-                    <p>teslacryptogrowth@gmail.com</p>
+                    <p className='text-sm'>elonmuskteslacryptogrowth@gmail.com</p>
                   </div>
                 </div>
               </div>
